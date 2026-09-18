@@ -1,1 +1,73 @@
-# menu10chucnangvip
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Menu 10 chức năng</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#050909;color:#e8ffff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.wrap{max-width:520px;margin:auto;padding:24px 16px 40px}
+h1{text-align:center;font-size:28px;margin:8px 0 24px}
+.card{background:#0b1717;border:1px solid #174545;border-radius:18px;padding:16px;margin-bottom:14px;box-shadow:0 0 20px #001515}
+label{display:block;font-size:14px;color:#91bcbc;margin-bottom:8px}
+input{width:100%;padding:14px;border-radius:12px;border:1px solid #286565;background:#061010;color:white;font-size:16px;outline:none}
+button{width:100%;padding:14px;margin-top:10px;border:0;border-radius:12px;background:#19d3c5;color:#001313;font-weight:700;font-size:16px}
+.status{text-align:center;margin:10px 0;color:#8ee}
+.feature{display:flex;align-items:center;justify-content:space-between;padding:14px 4px;border-bottom:1px solid #163232}
+.feature:last-child{border-bottom:0}
+.name{font-size:16px}
+.switch{width:48px;height:28px;border-radius:20px;background:#263838;position:relative;transition:.2s}
+.switch:after{content:"";position:absolute;width:22px;height:22px;top:3px;left:3px;border-radius:50%;background:#9aa;transition:.2s}
+.feature.on .switch{background:#19d3c5}
+.feature.on .switch:after{left:23px;background:#001313}
+#menu{display:none}
+.note{font-size:12px;color:#789090;text-align:center;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Menu 10 chức năng</h1>
+
+<div class="card">
+<label>Nhập key để kích hoạt</label>
+<input id="key" type="text" placeholder="Nhập key">
+<button onclick="unlock()">KÍCH HOẠT</button>
+<div id="status" class="status"></div>
+</div>
+
+<div id="menu" class="card">
+<div id="features"></div>
+</div>
+
+<p class="note">Giao diện HTML demo. Các công tắc chỉ thay đổi trạng thái hiển thị trên trang.</p>
+</div>
+
+<script>
+const VALID_KEY='PALOFSC2026';
+const names=[
+'Aimlock','Nhẹ tâm','Fix rung tâm','Fix lạc đạn','Đạn thẳng',
+'Aimboots','Aimhead','Tối ưu máy','Buff màn 120Hz','Tăng hiệu năng'
+];
+
+function unlock(){
+  const k=document.getElementById('key').value.trim();
+  const status=document.getElementById('status');
+  if(k===VALID_KEY){
+    document.getElementById('menu').style.display='block';
+    status.textContent='Kích hoạt thành công';
+    status.style.color='#55e6d6';
+  }else{
+    status.textContent='Key không hợp lệ';
+    status.style.color='#ff8c8c';
+  }
+}
+function toggle(el){
+  el.classList.toggle('on');
+}
+document.getElementById('features').innerHTML=names.map(n=>
+  `<div class="feature" onclick="toggle(this)"><span class="name">${n}</span><span class="switch"></span></div>`
+).join('');
+</script>
+</body>
+</html>
